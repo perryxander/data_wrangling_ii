@@ -62,3 +62,32 @@ swm_df =
     runtime = runtime_vec
   )
 ```
+
+## Get some water data
+
+This is coming from an API
+
+``` r
+nyc_water =
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.csv") %>%
+  content("parsed")
+```
+
+    ## 
+    ## -- Column specification --------------------------------------------------------
+    ## cols(
+    ##   year = col_double(),
+    ##   new_york_city_population = col_double(),
+    ##   nyc_consumption_million_gallons_per_day = col_double(),
+    ##   per_capita_gallons_per_person_per_day = col_double()
+    ## )
+
+``` r
+#JSON version
+
+#nyc_water =
+  #GET("https://data.cityofnewyork.us/resource/ia2d-e54m.json") %>%
+  #content() %>%
+  #jsonlite::fromJSON() %>%
+  #as_tibble()
+```
