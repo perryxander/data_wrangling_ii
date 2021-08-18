@@ -155,7 +155,7 @@ pokemon_data$abilities
 
 ## Closing thoughts
 
-
+Be reasonable with requests
 
 
 
