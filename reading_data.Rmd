@@ -137,6 +137,30 @@ brfss_2010 =
 ```
 
 
+## Some data aren't so nice
+
+Let's look at Pokemon..
+
+
+```{r}
+
+pokemon_data =
+  GET("https://pokeapi.co/api/v2/pokemon/ditto") %>%
+  content()
+
+pokemon_data$name
+pokemon_data$abilities
+```
+
+
+## Closing thoughts
+
+
+
+
+
+
+
 
 
 
