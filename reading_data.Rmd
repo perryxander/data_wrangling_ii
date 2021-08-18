@@ -121,6 +121,23 @@ nyc_water =
 
 ```
 
+## BRFSS
+
+
+same process, different data- alter request using query to get additional rows
+
+```{r}
+
+brfss_2010 = 
+  GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
+      query = list("$limit" = 5000)) %>% #$limit used in api to change amount of rows returned
+  content("parsed")
+
+
+```
+
+
+
 
 
 

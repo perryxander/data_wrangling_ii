@@ -91,3 +91,29 @@ nyc_water =
   #jsonlite::fromJSON() %>%
   #as_tibble()
 ```
+
+## BRFSS
+
+same process, different data- alter request using query to get
+additional rows
+
+``` r
+brfss_2010 = 
+  GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
+      query = list("$limit" = 5000)) %>% #$limit used in api to change amount of rows returned
+  content("parsed")
+```
+
+    ## 
+    ## -- Column specification --------------------------------------------------------
+    ## cols(
+    ##   .default = col_character(),
+    ##   year = col_double(),
+    ##   sample_size = col_double(),
+    ##   data_value = col_double(),
+    ##   confidence_limit_low = col_double(),
+    ##   confidence_limit_high = col_double(),
+    ##   display_order = col_double(),
+    ##   locationid = col_logical()
+    ## )
+    ## i Use `spec()` for the full column specifications.
