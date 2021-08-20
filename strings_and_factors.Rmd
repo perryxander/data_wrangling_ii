@@ -12,15 +12,15 @@ library(rvest)
 
 
 knitr::opts_chunk$set(
-  fig.width = 6,
-  fig.asp = .6,
-  out.width = "90%"
+	fig.asp = 0.6,
+	fig.width = 6,
+	out.width = "90%"
 )
 
 theme_set(theme_minimal() + theme(legend.position = "bottom"))
 
 options(
-  ggplot2.continous.colour = "viridis",
+  ggplot2.continous.color = "viridis",
   ggplot2.continous.fill = "viridis"
 )
 
@@ -175,12 +175,17 @@ data_marj =
 ```
 
 
-
+## NSDUH -- factors
 
 
 ```{r}
 
-
+data_marj %>%
+  filter(age == "12-17") %>%
+  mutate(State = fct_reorder(State,percent)) %>% #change state to factor, then reorder by percent
+  ggplot(aes(State, y = percent, color = year)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 
