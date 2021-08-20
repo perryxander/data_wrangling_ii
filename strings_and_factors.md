@@ -1,48 +1,20 @@
----
-title: "Strng and factors"
-output: github_document
----
-
-```{r setup, include=FALSE}
-
-library(tidyverse)
-
-library(p8105.datasets)
-library(rvest)
-
-
-knitr::opts_chunk$set(
-  fig.width = 6,
-  fig.asp = .6,
-  out.width = "90%"
-)
-
-theme_set(theme_minimal() + theme(legend.position = "bottom"))
-
-options(
-  ggplot2.continous.colour = "viridis",
-  ggplot2.continous.fill = "viridis"
-)
-
-scale_color_discrete = scale_colour_viridis_d
-scale_fill_discrete = scale_fill_viridis_d
-
-```
+Strng and factors
+================
 
 ## Strings and regex
 
-```{r}
-
+``` r
 string_vec = c("my", "name", "is", "jeff")
 
 str_detect(string_vec, "jeff")
-
 ```
 
-For exact matches, you can designate matches at the beginning or end of a line
+    ## [1] FALSE FALSE FALSE  TRUE
 
-```{r}
+For exact matches, you can designate matches at the beginning or end of
+a line
 
+``` r
 string_vec = c(
   "i think we all rule for participating",
   "i think i have been caught",
@@ -51,12 +23,17 @@ string_vec = c(
   )
 
 str_detect(string_vec, "^i think") #^ denotes that you want to search for something that starts with i think
-str_detect(string_vec, "i think$") #$denotes that you want to search for something that ends with i think
-
 ```
 
-```{r}
+    ## [1]  TRUE  TRUE  TRUE FALSE
 
+``` r
+str_detect(string_vec, "i think$") #$denotes that you want to search for something that ends with i think
+```
+
+    ## [1] FALSE FALSE FALSE  TRUE
+
+``` r
 string_vec = c(
   "Y'all remember Pres. HW Bush?",
   "I saw a green bush",
@@ -65,11 +42,11 @@ string_vec = c(
   )
 
 str_detect(string_vec,"[Bb]ush")
-
 ```
 
-```{r}
+    ## [1]  TRUE  TRUE  TRUE FALSE
 
+``` r
 string_vec = c(
   '7th inning stretch',
   '1st half soon to begin. Texas won the toss.',
@@ -78,13 +55,13 @@ string_vec = c(
   )
 
 str_detect(string_vec, "^[0-9][a-zA-Z]")
-
 ```
+
+    ## [1]  TRUE  TRUE FALSE  TRUE
 
 The character . matches anything.
 
-```{r}
-
+``` r
 string_vec = c(
   'Its 7:11 in the evening',
   'want to go to 7-11?',
@@ -93,11 +70,11 @@ string_vec = c(
   )
 
 str_detect(string_vec, "7.11") # need to put \\ to search character to find something with a . "7\\.11"
-
 ```
 
-```{r}
+    ## [1]  TRUE  TRUE FALSE  TRUE
 
+``` r
 string_vec = c(
   'The CI is [2, 5]',
   ':-]',
@@ -106,40 +83,40 @@ string_vec = c(
   )
 
 str_detect(string_vec, "\\[")
-
 ```
+
+    ## [1]  TRUE FALSE  TRUE  TRUE
 
 ## Factors
 
-```{r}
-
+``` r
 factor_vec = factor(c("male","male","female","female"))
 
 factor_vec
-
-as.numeric(factor_vec)
-
-
-
 ```
 
-what happens if i relevel....
+    ## [1] male   male   female female
+    ## Levels: female male
 
+``` r
+as.numeric(factor_vec)
+```
 
-```{r}
+    ## [1] 2 2 1 1
 
+what happens if i relevel….
+
+``` r
 factor_vec = fct_relevel(factor_vec, "male")
 
 as.numeric(factor_vec)
-
 ```
 
+    ## [1] 1 1 2 2
 
+## NSDUH– strings
 
-## NSDUH-- strings
-
-```{r}
-
+``` r
 nsduh_url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
 
 
@@ -150,12 +127,9 @@ table_marj =
   html_table() %>%
   slice(-1) %>%
   as_tibble()
-
 ```
 
-
-```{r}
-
+``` r
 data_marj =
   table_marj %>%
   select(-contains("P Value")) %>%
@@ -171,22 +145,4 @@ data_marj =
     percent = as.numeric(percent)
   ) %>%
   filter(!(State %in% c("Total U.S.","Northeast","Midwest","South","West")))
-
 ```
-
-
-
-
-
-```{r}
-
-
-
-```
-
-
-
-
-
-
-
